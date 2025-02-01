@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-
+//https://back-mov.onrender.com/
 const Hotel = () => {
   const [rooms, setRooms] = useState([]);
   const [numRooms, setNumRooms] = useState(1);
@@ -7,7 +7,7 @@ const Hotel = () => {
 
   const fetchRooms = useCallback(async () => {
     try {
-      const res = await fetch("https://movies-3gw1.vercel.app/");
+      const res = await fetch("https://back-mov.onrender.com/rooms");
       if (!res.ok) throw new Error("Failed to fetch rooms");
       const data = await res.json();
 
@@ -34,7 +34,7 @@ const Hotel = () => {
 
   const bookRooms = async () => {
     try {
-      const res = await fetch("http://localhost:5000/book", {
+      const res = await fetch("https://back-mov.onrender.com/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ count: numRooms }),
@@ -52,13 +52,13 @@ const Hotel = () => {
   };
 
   const resetRooms = async () => {
-    await fetch("http://localhost:5000/reset", { method: "POST" });
+    await fetch("https://back-mov.onrender.com/reset", { method: "POST" });
     fetchRooms();
   };
 
   const randomizeRooms = async () => {
     try {
-      await fetch("http://localhost:5000/random", { method: "POST" });
+      await fetch("https://back-mov.onrender.com/random", { method: "POST" });
       fetchRooms();
     } catch (err) {
       setError("Failed to randomize rooms");
